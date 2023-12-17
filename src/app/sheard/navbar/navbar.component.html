@@ -1,14 +1,13 @@
 <section id="navbar">
-  <div class="container pb-2">
+  <div class="container-fluid">
     <div class="row">
       <div
         class="col-3 ms-auto d-flex justify-content-between align-items-center"
       >
       
         <div class="d-flex align-items-center">
-          <button  class= "mat-icon-button "  (click)="toggleTheme()">
-            <mat-icon>{{ isDarkMode ? 'wb_sunny' : 'nights_stay' }}</mat-icon>
-          </button>
+         
+
           <a routerLink="/dashboard/userProfile" class="user-avater">
             <img
               class="user-avatar "
@@ -21,8 +20,8 @@
           </a>
         
           <span class="ms-2">
-            <span class="user-name h5">{{ currentUser.userName }}</span>
-            <span class="d-block">{{ currentUser.group.name }}</span>
+            <span class="user-name h5">{{ currentUser?.userName }}</span>
+            <span class="d-block">{{ currentUser?.group?.name }}</span>
           </span>
         
           <div class="dropdown ms-2">
@@ -35,7 +34,7 @@
 
             <ul class="dropdown-menu">
               <li>
-                <a (click)="hello()" class="dropdown-item bg-info" routerLink="/dashboard/userProfile"
+                <a class="dropdown-item bg-info" routerLink="/dashboard/userProfile"
                   >Profile</a
                 >
               </li>
@@ -45,16 +44,23 @@
                 >
               </li>
             </ul>
+           
           </div>
+          
         </div>
-        <!-- <app-theme-switch class="m-2"></app-theme-switch> -->
        
         <span class="mx-3 fs-4 fw-bold"><i class="fa-solid fa-bell"></i></span>
+        <button  class= "mat-icon-button"  (click)="toggleTheme()">
+          <mat-icon>{{ isDarkMode ? 'wb_sunny' : 'nights_stay' }}</mat-icon>
+        </button>
       </div>
 
-     
+ 
+      
       
       
     </div>
+    
+    
   </div>
 </section>

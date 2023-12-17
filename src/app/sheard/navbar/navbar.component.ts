@@ -11,10 +11,7 @@ export class NavbarComponent {
 
   currentUser:any;
   userName=localStorage.getItem('userName')?localStorage.getItem('userName'):'Guest';
-hello(){
-  console.log('hello');
-  
-}
+
   constructor(private _HelperService:HelperService){
     this.isDarkMode = this._HelperService.isDarkMode();
 
