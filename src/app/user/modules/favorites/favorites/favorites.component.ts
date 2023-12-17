@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FavoritesService } from '../services/favorites.service';
 import { ToastrService } from 'ngx-toastr';
-import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-favorites',
@@ -10,14 +9,17 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class FavoritesComponent implements OnInit {
 myFav:any;
+Message:string=''
 pageSize:number=20;
 pageNumber:number|undefined=1;
   TableResponse: any;
+
   constructor(private _ToastrService :ToastrService,private _FavoritesService:FavoritesService) { }
 
   ngOnInit() {
     this.getAllFav();
   }
+ 
 
   getAllFav(){
    this._FavoritesService.ongetAllFav().subscribe({
@@ -34,25 +36,19 @@ pageNumber:number|undefined=1;
         console.log(res);
         this.myFav=res.data;
         
-      },error:()=>{
+        
+
+        
+      },error:(err)=>{
+        this._ToastrService.error(err.error.message,'Error!');
 
       },complete:()=>{
-         this._ToastrService.success('Removed From Favorite','success');
+         this._ToastrService.success(this.Message,'Removed From Favorite');
          this.getAllFav();
       }
     })
   }
-  handlePageEvent(e: PageEvent) {
-    console.log(e);
-    
-    this.pageSize=e.pageSize;
-    this.pageNumber=this.TableResponse?.pageNumber;
-    this.gettableData()
-    
-  }
-  gettableData() {
-    throw new Error('Method not implemented.');
-  }
-
+ 
+  
   
 }

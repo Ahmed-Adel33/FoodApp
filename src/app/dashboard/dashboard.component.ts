@@ -106,9 +106,6 @@ openDialog(): void {
     }
   });
 }
-toggleTheme() {
-  this.isDarkMode = !this.isDarkMode;
-  this._HelperService.setDarkMode(this.isDarkMode);
-}
+
 }
 

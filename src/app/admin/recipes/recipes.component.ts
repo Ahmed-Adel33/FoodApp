@@ -13,7 +13,7 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./recipes.component.css']
 })
 export class RecipesComponent implements OnInit {
-
+  Message:string=''
   searchValue:string=''
   pageSize:number=20;
   pageNumber:number|undefined=1;
@@ -65,12 +65,13 @@ ondeleteRecipe(id:number){
     next:(res)=>{
       this.TableResponse=res;
       this.TableData=this.TableResponse?.data
-      
+      this.Message=res.message;
+
     },error:(err)=>{
-      console.log(err);
+      console.log(err.error.message);
       
     },complete:()=>{
-        this._ToastrService.success('Recipes deleted successfully');
+        this._ToastrService.success(this.Message,' Recipes Delteted successfully');
         this.gettableData();
     }
   })

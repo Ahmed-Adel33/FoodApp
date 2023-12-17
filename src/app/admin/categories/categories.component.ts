@@ -7,8 +7,6 @@ import {  MatDialog, } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteDialogComponent } from 'src/app/sheard/delete-dialog/delete-dialog.component';
 import { HelperService } from 'src/app/services/helper.service';
-import { ITag } from '../recipes/models/recipe';
-import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -85,12 +83,13 @@ openAddDialog(): void {
       next:(res)=>{
         this.TableResponse=res;
         this.TableData=this.TableResponse?.data
-        
+        this.Message=res.message;
+
       },error:(err)=>{
-        console.log(err);
-        
+        console.log(err.error.message);
+
       },complete:()=>{
-          this.ToastrService.success('Category Added ','fun');
+          this.ToastrService.success(this.Message,'Category Added successfully');
           this.gettableData();
       }
     })
@@ -101,12 +100,12 @@ openAddDialog(): void {
       next:(res)=>{
         this.TableResponse=res;
         this.TableData=this.TableResponse?.data
-        
+        this.Message=res.message;
       },error:(err)=>{
         console.log(err);
         
       },complete:()=>{
-          this.ToastrService.success('Category deleted successfully');
+          this.ToastrService.success(this.Message,'Category deleted successfully');
           this.gettableData();
       }
     })
@@ -159,7 +158,7 @@ onEditCategory(id:number,name:string){
       
     },
     complete:()=>{
-    this.ToastrService.success(this.Message,'Successfully!');
+    this.ToastrService.success(this.Message,'Category Updated Successfully!');
     this.gettableData();
     }
   })

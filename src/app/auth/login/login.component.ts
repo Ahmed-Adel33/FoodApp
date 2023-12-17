@@ -26,6 +26,8 @@ export class LoginComponent implements OnInit {
     this._AuthService.onlogin(data.value).subscribe({
       next:(res:any)=>{
         console.log(res); 
+        this.Message=res.message;
+
        
                
        localStorage.setItem('userToken',res.token);      
@@ -41,7 +43,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/dashboard'])
        // console.log(this.Message);
         
-        this.toastr.success(this.Message, 'successfully!');
+        this.toastr.success(this.Message, 'Login successfully!');
 
 
       }
