@@ -11,11 +11,11 @@ import { VerifyComponent } from './verify/verify.component';
 import { ChangepasswordComponent } from '../admin/changepassword/changepassword.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'login',pathMatch:'full'},
+  {path:'',redirectTo:'login',pathMatch:'full'}, 
   
   {path:'login',component:LoginComponent},
   {path:'ResetPassword',component:ResetPasswordComponent},
-  {path:'register',component:RegisterComponent},
+  {path:'register',component:RegisterComponent },
   {path:'changepassword',component:ChangepasswordComponent},
 
 

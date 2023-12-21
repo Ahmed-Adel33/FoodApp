@@ -1,8 +1,8 @@
 <section id="login">
   <div class="container">
     <div class="row">
-
     <div class="col-md-6 mx-auto">
+      
        <div class="card-auth">
         <div class="text-center">
           <img src="../../../assets/images/logo.svg" class="w-50" alt="">
@@ -41,10 +41,15 @@
               <a (click)="openDialog()" class="text-main text-decoration-none">Forgot Password?</a>
               
             </div>
-            <button  [disabled]="loginForm.invalid"  class="btn bg-main text-white w-100" >Login</button>
-         
+            <button *ngIf="isLoading==false"  [disabled]="loginForm.invalid"  class="btn bg-main text-white w-100" >Login</button>
+          
+            <button *ngIf="isLoading==true"  class="primary w-25" >
+
+              <app-button-loader></app-button-loader>
+  
+            </button>
            </form>
-         
+           
        </div>
 
     </div>

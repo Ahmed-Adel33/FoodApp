@@ -1,7 +1,5 @@
-import { CategoryService } from './../../services/category.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import {   MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { ICategory } from '../../models/category';
 
 @Component({
@@ -11,6 +9,7 @@ import { ICategory } from '../../models/category';
 })
 export class AddEditCategoryComponent implements OnInit {
 categoryName:string=''
+isLoading:boolean=false;
 
 constructor(
   public dialogRef: MatDialogRef<AddEditCategoryComponent>,
@@ -18,13 +17,18 @@ constructor(
 ) {
   this.categoryName = this.data.categoryName || '';
 
-        this.categoryName = this.data.categoryName || '';
+        // this.categoryName = this.data.categoryName || '';
  
   }
 
   ngOnInit() {
+
+  }
+  onSubmit(){
+
   }
 onclose(){
+
   this.dialogRef.close();
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 
 @Component({
@@ -6,11 +6,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './sheard.component.html',
   styleUrls: ['./sheard.component.css']
 })
-export class SheardComponent implements OnInit {
+export class SheardComponent {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  
 }

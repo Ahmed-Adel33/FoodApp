@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
   hide:boolean=true;
   hideConfirm:boolean=true
   Message:string='';
+  isLoading:boolean=false;
   registerForm=new FormGroup({
     userName:new FormControl(null,[Validators.required]),
     email:new FormControl(null,[Validators.required,Validators.email]),
@@ -43,7 +44,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(data:FormGroup){
-    
+    this.isLoading=true;
     let mydata=new FormData();
     mydata.append('userName',data.value.userName);
     mydata.append('email',data.value.email);
@@ -68,12 +69,13 @@ export class RegisterComponent implements OnInit {
        
         
       },error:(err)=>{
-        
+        this.isLoading=false;
         this.toastr.error(err.error.message, ' Error!');
 
 
         
       },complete:()=>{
+        this.isLoading=false;
          this.openDialog()        
         this.toastr.success(this.Message, 'successfully!');
 

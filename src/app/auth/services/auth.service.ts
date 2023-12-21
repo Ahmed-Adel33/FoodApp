@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { Observable } from 'rxjs';
 import { ILogin } from 'src/app/models/login';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 HttpClient
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,7 @@ constructor(private _HttpClient:HttpClient) {
   if(localStorage.getItem('userToken')!==null){
     this.getProfile();
   }
+  
  }
 
 onlogin(data:ILogin){

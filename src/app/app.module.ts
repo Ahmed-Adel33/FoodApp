@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {  NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,10 +9,9 @@ import { GlobalInterceptor } from './Interceptor/global.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { SheardModule } from './sheard/sheard.module';
 
-
 @NgModule({
   declarations: [		
-    AppComponent, 
+    AppComponent
       
    ],
   imports: [
@@ -21,6 +20,7 @@ import { SheardModule } from './sheard/sheard.module';
     BrowserAnimationsModule,
     HttpClientModule,
     SheardModule,
+
     
     
     ToastrModule.forRoot({

@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../services/auth.service';
 import {  MatDialogRef } from '@angular/material/dialog';
 import { RequestResetPasswordComponent } from '../request-reset-password/request-reset-password.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -16,6 +17,7 @@ export class ResetPasswordComponent implements OnInit {
   Message:string=''
   hide:boolean=true;
   hideConfirm:boolean=true
+  isLoading:boolean=false;
 
   userEmail=localStorage.getItem('email');
   ResetForm=new FormGroup({
@@ -36,11 +38,12 @@ export class ResetPasswordComponent implements OnInit {
 
   });
 
-  constructor( private _AuthService:AuthService,private toastr: ToastrService, @Optional() public dialogRef:MatDialogRef<RequestResetPasswordComponent>) { }
+  constructor( private router:Router ,private _AuthService:AuthService,private toastr: ToastrService, @Optional() public dialogRef:MatDialogRef<RequestResetPasswordComponent>) { }
 
   ngOnInit() {
   }
   onSubmit(data:FormGroup){
+    this.isLoading=true;
     console.log(data);
     this._AuthService.onRestPassword(data.value).subscribe({
       next:(res:any)=>{
@@ -50,12 +53,14 @@ export class ResetPasswordComponent implements OnInit {
        
         
       },error:(err:any)=>{
-        
+        this.isLoading=false;
         this.toastr.error(err.error.message, 'Toastr fun!');
 
 
         
       },complete:()=>{
+        this.isLoading=false;
+        this.router.navigate(['/auth/login']);
         this.toastr.success(this.Message, 'Toastr fun!');
 
 

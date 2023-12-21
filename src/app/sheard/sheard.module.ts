@@ -17,6 +17,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { HomeComponent } from './home/home.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { RouterModule } from '@angular/router';
+import { ButtonLoaderComponent } from './button-loader/button-loader.component';
 
 @NgModule({
   imports:[
@@ -26,10 +27,10 @@ import { RouterModule } from '@angular/router';
     ,MatIconModule,HttpClientModule,FormsModule
     ,MatSidenavModule,ReactiveFormsModule,MatPaginatorModule,NgxDropzoneModule,RouterModule
     ,MatDialogModule],
-  declarations: [SheardComponent, SidebarComponent, NavbarComponent, HomeComponent,DeleteDialogComponent],
+  declarations: [SheardComponent,ButtonLoaderComponent, SidebarComponent, NavbarComponent, HomeComponent,DeleteDialogComponent],
 
   exports:[ MatButtonModule,SidebarComponent ,NavbarComponent
-    ,HomeComponent,MatDividerModule, MatFormFieldModule,MatIconModule,RouterModule,MatSidenavModule,NgxDropzoneModule,HttpClientModule,DeleteDialogComponent,MatPaginatorModule,ReactiveFormsModule,MatDialogModule,FormsModule
+    ,HomeComponent,MatDividerModule,ButtonLoaderComponent,MatFormFieldModule,MatIconModule,RouterModule,MatSidenavModule,NgxDropzoneModule,HttpClientModule,DeleteDialogComponent,MatPaginatorModule,ReactiveFormsModule,MatDialogModule,FormsModule
   ]
 })
 export class SheardModule { }

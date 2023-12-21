@@ -71,7 +71,7 @@ ondeleteRecipe(id:number){
       console.log(err.error.message);
       
     },complete:()=>{
-        this._ToastrService.success(this.Message,' Recipes Delteted successfully');
+        this._ToastrService.success(this.Message,' successfully');
         this.gettableData();
     }
   })

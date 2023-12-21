@@ -150,8 +150,13 @@
               <a (click)="openDialog()" class="text-main text-decoration-none">Have  code?</a>
               
             </div>
-            <button   class="btn bg-main text-white w-100" >Register</button>
-         
+            <button  *ngIf="isLoading==false"   class="btn bg-main text-white w-100" >Register</button>
+                
+        <button *ngIf="isLoading==true"  class="primary w-25" >
+
+          <app-button-loader></app-button-loader>
+
+        </button>
            </form>
          
        </div>

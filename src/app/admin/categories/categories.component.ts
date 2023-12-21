@@ -7,6 +7,8 @@ import {  MatDialog, } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteDialogComponent } from 'src/app/sheard/delete-dialog/delete-dialog.component';
 import { HelperService } from 'src/app/services/helper.service';
+import { ITag } from '../recipes/models/recipe';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -158,7 +160,7 @@ onEditCategory(id:number,name:string){
       
     },
     complete:()=>{
-    this.ToastrService.success(this.Message,'Category Updated Successfully!');
+    this.ToastrService.success(this.Message,'Successfully!');
     this.gettableData();
     }
   })

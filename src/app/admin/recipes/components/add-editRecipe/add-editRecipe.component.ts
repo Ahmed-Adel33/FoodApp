@@ -30,6 +30,7 @@ RecipeForm=new FormGroup({
   categoriesIds:new FormControl(null),
 
 })
+isLoading:boolean=false;
 
   constructor(    private _HelperService:HelperService,private _RecipeService:RecipeService,private _ActivatedRoute:ActivatedRoute,private router:Router,private toastr:ToastrService) { 
  this.recipeId=_ActivatedRoute.snapshot.params['id'];
@@ -58,11 +59,11 @@ getRecipesById(id:number){
     },complete:()=>{
       this.imgSrc='https://upskilling-egypt.com:443/api/v1/'+this.recipeData+this.imgSrc;
       this.RecipeForm.patchValue({
-        name:this.recipeData.name,
-        price:this.recipeData.price,
-        description:this.recipeData.description,
-        tagId:this.recipeData.tag.id,
-        categoriesIds:this.recipeData.category[0].id,
+        name:this.recipeData?.name,
+        price:this.recipeData?.price,
+        description:this.recipeData?.description,
+        tagId:this.recipeData?.tag.id,
+        categoriesIds:this.recipeData?.category[0].id,
  
 
       })
@@ -73,6 +74,8 @@ getRecipesById(id:number){
 
 
 onSubmit(data:FormGroup){
+  this.isLoading=true;
+
   console.log(data.value);
   let myData=new FormData;
   myData.append('name',data.value.name);
@@ -88,8 +91,11 @@ onSubmit(data:FormGroup){
       console.log(res);
       
     },error:()=>{
-  
+      this.isLoading=false;
+
     },complete:()=>{
+      this.isLoading=false;
+
       this.toastr.success('Recipe updated','successfuly');
       this.router.navigate(['/dashboard/admin/recipes'])
     }

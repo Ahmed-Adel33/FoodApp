@@ -12,17 +12,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+
    Message:string='';
   loginForm=new FormGroup({
     email:new FormControl(null,[Validators.required,Validators.email]),
     password:new FormControl(null,[Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$')]),
   })
+  isLoading:boolean=false;
   constructor( private _AuthService:AuthService,private toastr: ToastrService,private dialog: MatDialog,private router:Router) { }
 
   ngOnInit() {
+
   }
 
   onSubmit(data:FormGroup){
+    this.isLoading=true;
     this._AuthService.onlogin(data.value).subscribe({
       next:(res:any)=>{
         console.log(res); 
@@ -35,10 +39,12 @@ export class LoginComponent implements OnInit {
        
         
       },error:(err)=>{
-        
+        this.isLoading=false;
+
         this.toastr.error(err.error.message, ' Error!');
    
       },complete:()=>{
+        this.isLoading=false;
 
         this.router.navigate(['/dashboard'])
        // console.log(this.Message);
@@ -90,5 +96,8 @@ export class LoginComponent implements OnInit {
     }
 
     
-  }
 
+
+    
+
+}

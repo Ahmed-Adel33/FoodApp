@@ -11,6 +11,7 @@ export class ChangepasswordComponent  {
   Message:string=''
   hideConfirm:boolean=true
   hide:boolean=true
+  isLoading:boolean=false;
   useremail=localStorage.getItem('email');
   userEmail = localStorage.getItem('email');
   changePasswordForm = new FormGroup({
@@ -49,6 +50,7 @@ export class ChangepasswordComponent  {
   // }
 
   onSubmit(data:FormGroup){
+    this.isLoading=true;
     console.log(data);
    // this.matchpassword(data);           
    return  this._AuthService.onChangePassword(data.value).subscribe({
@@ -59,11 +61,13 @@ export class ChangepasswordComponent  {
              
         },
         error:(err)=>{
+          this.isLoading=false;
           this.toastr.error(err.error.message, ' Error');
     
           
         },
         complete:()=>{
+          this.isLoading=false;
           this.toastr.success( this.Message,'Successfully');
          
     

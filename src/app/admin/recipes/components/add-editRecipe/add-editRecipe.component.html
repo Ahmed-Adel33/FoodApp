@@ -69,7 +69,13 @@
       <div class="text-end py-2">
         <button type="button" class="outline-primary">Cancel</button>
 
-        <button   class="primary my-2">Save</button>
+        <button *ngIf="isLoading==false"   class="primary my-2">Save</button>
+         
+        <button *ngIf="isLoading==true"  class="primary w-25" >
+
+          <app-button-loader></app-button-loader>
+
+        </button>
       </div>
     </div>
   </div>
