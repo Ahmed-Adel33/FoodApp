@@ -13,6 +13,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./add-editRecipe.component.css']
 })
 export class AddEditRecipeComponent implements OnInit {
+  isEditMode: boolean = false;
+  isAddMode: boolean = true;
+  isUpdate: boolean = false;
+
   Message:string=''
   imgSrc:any;
   tags:ITag[]=[];
@@ -32,11 +36,20 @@ RecipeForm=new FormGroup({
 })
 isLoading:boolean=false;
 
-  constructor(    private _HelperService:HelperService,private _RecipeService:RecipeService,private _ActivatedRoute:ActivatedRoute,private router:Router,private toastr:ToastrService) { 
+  constructor( private route:ActivatedRoute,   private _HelperService:HelperService,private _RecipeService:RecipeService,private _ActivatedRoute:ActivatedRoute,private router:Router,private toastr:ToastrService) { 
  this.recipeId=_ActivatedRoute.snapshot.params['id'];
  if(this.recipeId){
-  this.isUpdatedPage=true;
   this.getRecipesById(this.recipeId);
+
+  this.isUpdatedPage=true;
+  this.route.url.subscribe(url=>{
+    this.isEditMode=url.some(segment=> segment.path ==='edit')
+    this.disableFormControls();
+  })
+  this.route.url.subscribe(url=>{
+    this.isAddMode=url.some(segment=> segment.path ==='add')
+    this.enableFormControls();
+  });
  }else{
   this.isUpdatedPage=false;
  }
@@ -48,6 +61,26 @@ isLoading:boolean=false;
     this.getAllCategories()
   }
 
+  disableFormControls() {
+    if (!this.isEditMode) {
+      this.RecipeForm.get('name')?.disable();
+      this.RecipeForm.get('price')?.disable();
+      this.RecipeForm.get('description')?.disable();
+      this.RecipeForm.get('tagId')?.disable();
+      this.RecipeForm.get('categoriesIds')?.disable();
+      this.RecipeForm.get('recipeImage')?.disable();
+    }
+  }
+enableFormControls() {
+  if (this.isAddMode) {
+    this.RecipeForm.get('name')?.enable();
+    this.RecipeForm.get('price')?.enable();
+    this.RecipeForm.get('description')?.enable();
+    this.RecipeForm.get('tagId')?.enable();
+    this.RecipeForm.get('categoriesIds')?.enable();
+    this.RecipeForm.get('recipeImage')?.enable();
+  }
+}
 getRecipesById(id:number){
   this._RecipeService.getRecipeById(id).subscribe({
     next:(res)=>{
